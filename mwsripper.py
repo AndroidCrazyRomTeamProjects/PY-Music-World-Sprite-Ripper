@@ -199,6 +199,10 @@ def export_image(sprite, name):
     # Create the exported folder if it doesn't exist
     if (not os.path.exists("Converted")):
         os.mkdir("Converted")
+    # make the images transpasent
+    img = img.convert("RGBA")
+    datas = img.getdata()
+    newData = []
     for item in datas:
         if item[0] == 32 and item[1] == 144 and item[2] == 32:
             newData.append((255, 255, 255, 0))
