@@ -199,7 +199,12 @@ def export_image(sprite, name):
     # Create the exported folder if it doesn't exist
     if (not os.path.exists("Converted")):
         os.mkdir("Converted")
-    
+    for item in datas:
+        if item[0] == 32 and item[1] == 144 and item[2] == 32:
+            newData.append((255, 255, 255, 0))
+        else:
+            newData.append(item)
+    img.putdata(newData)
     # Export the image
     img.putdata(data)
     img.save("Converted/"+name+'.png')
