@@ -199,6 +199,7 @@ def export_image(sprite, name):
     # Create the exported folder if it doesn't exist
     if (not os.path.exists("Converted")):
         os.mkdir("Converted")
+    img.putdata(data)
     # make the images transpasent
     img = img.convert("RGBA")
     datas = img.getdata()
@@ -210,7 +211,6 @@ def export_image(sprite, name):
             newData.append(item)
     img.putdata(newData)
     # Export the image
-    img.putdata(data)
     img.save("Converted/"+name+'.png')
     print("Exported '"+name+".png'")
     return
