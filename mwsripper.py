@@ -195,21 +195,20 @@ def export_image(sprite, name):
         pal = sprite.palette[sprite.texels[count]]
         data.append((pal.red, pal.green, pal.blue))
         count = count + 1
-        
-    # Create the exported folder if it doesn't exist
-    if (not os.path.exists("Converted")):
-        os.mkdir("Converted")
     img.putdata(data)
     # make the images transpasent
     img = img.convert("RGBA")
     datas = img.getdata()
     newData = []
     for item in datas:
-        if item[0] == 32 and item[1] == 144 and item[2] == 32:
+        if (item[0] == 32 and item[1] == 144 and item[2] == 32) or (item[0] == 34 and item[1] == 146 and item[2] == 34):
             newData.append((255, 255, 255, 0))
         else:
             newData.append(item)
     img.putdata(newData)
+    # Create the exported folder if it doesn't exist
+    if (not os.path.exists("Converted")):
+        os.mkdir("Converted")
     # Export the image
     img.save("Converted/"+name+'.png')
     print("Exported '"+name+".png'")
